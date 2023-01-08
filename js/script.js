@@ -100,6 +100,3 @@ function game(){
 
 
 
-game();
-
-if(confirm("Play Again?")) game();
