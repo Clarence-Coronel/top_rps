@@ -2,23 +2,33 @@ body{
     margin: 0;
     padding: 0;
     display: flex;
+    flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
     background-color: aquamarine;
     height: 100vh;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
 }
 
 button{
-    flex-basis: 200px;
-    height: 40px;
+    flex-basis: 40px;
+    width: 200px;
     background-color: beige;
     border: 1px solid white;
     border-radius: 0.7rem;
     font-size: 1.2rem;
-    color: burlywood
+    color: burlywood;
+    margin-bottom: 5%;
 }
 
 button:hover{
     color: rgb(134, 131, 131);
     cursor: pointer;
+}
+
+p{  
+    color: rgb(77, 129, 207);
+    font-size: 1.2rem;
+    text-align: center;
 }

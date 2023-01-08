@@ -17,7 +17,7 @@ function getPlayerChoice(){
     let choice;
     while(isNotValid){
 
-        choice = prompt("Pick a Weapon(ROCK, PAPER, or SCISSORS): ").toString().toUpperCase();
+        choice = prompt("Pick a Weapon(ROCK, PAPER, or SCISSORS): ").toUpperCase();
         if( (choice === CHOICES[0]) || (choice === CHOICES[1]) || (choice === CHOICES[2]) ){
             isNotValid = false;
             return choice;
