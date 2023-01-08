@@ -1,0 +1,24 @@
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aquamarine;
+    height: 100vh;
+}
+
+button{
+    flex-basis: 200px;
+    height: 40px;
+    background-color: beige;
+    border: 1px solid white;
+    border-radius: 0.7rem;
+    font-size: 1.2rem;
+    color: burlywood
+}
+
+button:hover{
+    color: rgb(134, 131, 131);
+    cursor: pointer;
+}
