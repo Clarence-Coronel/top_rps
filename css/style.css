@@ -73,9 +73,24 @@ button{
     margin-top: 40vh;
     font-size: 2rem;
     font-family: 'Press Start 2P', cursive;
+    padding: 2rem;
 }
 
 button.selected{
     background-color: #0085fd;
     color: blueviolet;
+}
+
+.win{
+    background-color: transparent;
+    border: 2px solid #39fc03;
+    text-decoration: underline;
+    padding: 2rem;
+}
+
+.lose{
+    background-color: transparent;
+    border: 2px solid red;
+    text-decoration: underline;
+    padding: 2rem;
 }

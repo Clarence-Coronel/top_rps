@@ -1,8 +1,10 @@
 const CHOICES = ["ROCK", "PAPER", "SCISSORS"];
 let playerPick ="";
+
 let playerWin = 0;
 let compWin = 0;
 let drawCounter = 0;
+
 const MAXROUNDS = 5;
 
 const start = document.querySelector('.start');
@@ -10,6 +12,8 @@ const rock = document.querySelector("button[data-pick='rock']");
 const paper = document.querySelector("button[data-pick='paper']");
 const scissors = document.querySelector("button[data-pick='scissors']");
 const display = document.querySelector(".msg");
+
+
 
 rock.addEventListener('click', () => {
 
@@ -34,7 +38,6 @@ start.addEventListener('click', () => {
     const endMsg = "CHOOSE SOMETHING!";
     if(playerPick === "") {
         if(start.textContent === strtMsg){
-            console.log("pressed start")
             start.classList.remove("btn");
             start.classList.add("error");
             start.textContent = endMsg;
@@ -53,9 +56,30 @@ start.addEventListener('click', () => {
         playRound(playerPick, comp);
     }
     
+    display.classList.remove('win');
+    display.classList.remove('lose');
+
     undoChange(rock, paper, scissors);
+    processWinner();
 
 });
+
+function processWinner(){
+    if(playerWin == 5){
+
+        display.textContent = 'YOU WON THE GAME! CONGRATULATION!';
+        display.classList.add('win');
+        playerWin = 0;
+        compWin = 0;
+    }
+
+    if(compWin == 5){
+        display.textContent = 'YOU LOST THE GAME! BETTER LUCK NEXT TIME!';
+        display.classList.add('lose');
+        playerWin = 0;
+        compWin = 0;
+    }
+}
 
 function undoChange(rock, paper, scissors){
     rock.classList.add('btn');
@@ -66,11 +90,13 @@ function undoChange(rock, paper, scissors){
     paper.classList.remove('selected');
     scissors.classList.remove('selected');
 
-    start.style.color = 'white';
+    // start.style.color = 'white';
+    // start.style.backgroundColor = 'violet';
 
-    setTimeout(()=> {
-        start.style.color = 'aqua';
-    },1000)
+    // setTimeout(()=> {
+    //     start.style.color = 'aqua';
+    //     start.style.backgroundColor = 'blueviolet';
+    // },1000)
 
     playerPick = '';
 }
