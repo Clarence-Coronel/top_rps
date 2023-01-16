@@ -1,4 +1,3 @@
-
 *{
     margin: 0;
     padding: 0;
@@ -28,6 +27,7 @@ div.screen{
     overflow: hidden;
     margin: 2rem;
     box-shadow: 10px 10px rgb(53, 8, 73);
+    background-color: blueviolet;
 }
 
 button{
@@ -38,7 +38,7 @@ button{
 
 .btn{
     color: aqua;
-    background-color: blueviolet;
+    background-color: transparent   ;
 }
 
 .attack-ui button{
@@ -73,4 +73,9 @@ button{
     margin-top: 40vh;
     font-size: 2rem;
     font-family: 'Press Start 2P', cursive;
+}
+
+button.selected{
+    background-color: #0085fd;
+    color: blueviolet;
 }

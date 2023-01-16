@@ -11,10 +11,23 @@ const paper = document.querySelector("button[data-pick='paper']");
 const scissors = document.querySelector("button[data-pick='scissors']");
 const display = document.querySelector(".msg");
 
-rock.addEventListener('click', () => playerPick='rock');
-paper.addEventListener('click', () => playerPick='paper');
-scissors.addEventListener('click', () => playerPick='scissors');
+rock.addEventListener('click', () => {
 
+    //add btn after click sa ibang buttons
+
+    change(rock, paper, scissors);
+    playerPick='rock';
+});
+
+paper.addEventListener('click', () => {
+    change(paper, rock, scissors);
+    playerPick='paper';
+});
+
+scissors.addEventListener('click', () => {
+    change(scissors, rock, paper);
+    playerPick='scissors';
+});
 
 start.addEventListener('click', () => {
     const strtMsg = "Start";
@@ -40,9 +53,40 @@ start.addEventListener('click', () => {
         playRound(playerPick, comp);
     }
     
+    undoChange(rock, paper, scissors);
+
 });
 
+function undoChange(rock, paper, scissors){
+    rock.classList.add('btn');
+    paper.classList.add('btn');
+    scissors.classList.add('btn');
 
+    rock.classList.remove('selected');
+    paper.classList.remove('selected');
+    scissors.classList.remove('selected');
+
+    start.style.color = 'white';
+
+    setTimeout(()=> {
+        start.style.color = 'aqua';
+    },1000)
+
+    playerPick = '';
+}
+
+function change(selected, nonSelect, nonSelect2){
+
+    selected.classList.add('selected');
+    nonSelect.classList.add('btn');
+    nonSelect2.classList.add('btn');
+    
+    selected.classList.remove('btn');
+
+    nonSelect.classList.remove('selected');
+    nonSelect2.classList.remove('selected');
+
+}
 
 
 
@@ -81,44 +125,53 @@ function playRound(player, comp){
         )   {
                 if(player === CHOICES[0]) {
                     playerWin++;
-                    msg.textContent = "You WIN! ROCK beats SCISSORS.";
+                    display.textContent = "You WIN! ROCK beats SCISSORS.";
+                    display.style.color = '#39fc03';
                 }
                 else if(player === CHOICES[1]) {
                     playerWin++;
-                    msg.textContent = "You WIN! PAPER beats ROCK.";
+                    display.textContent = "You WIN! PAPER beats ROCK.";
+                    display.style.color = '#39fc03';
                 } 
                 else {
                     playerWin++;
-                    msg.textContent = "You WIN! SCISSORS beats PAPER.";
+                    display.textContent = "You WIN! SCISSORS beats PAPER.";
+                    display.style.color = '#39fc03';
                 } 
             }
     else if(player === comp) {
         if(player === CHOICES[0]) {
             drawCounter++;
-            msg.textContent = "DRAW! ROCK does not beat ROCK.";
+            display.textContent = "DRAW! ROCK does not beat ROCK.";
+            display.style.color = 'white';
         }
         else if(player === CHOICES[1]) {
             drawCounter++;
-            msg.textContent = "DRAW! PAPER does not beat PAPER.";
+            display.textContent = "DRAW! PAPER does not beat PAPER.";
+            display.style.color = 'white';
         }
         else if(player === CHOICES[2]) {
             drawCounter++;
-            msg.textContent = "DRAW! SCISSORS does not beat SCISSORS.";
+            display.textContent = "DRAW! SCISSORS does not beat SCISSORS.";
+            display.style.color = 'white';
         }
     }
     else{
 
         if(comp === CHOICES[0]) {
             compWin++;
-            msg.textContent = "You LOSE! ROCK beats SCISSORS.";
+            display.textContent = "You LOSE! ROCK beats SCISSORS.";
+            display.style.color = 'red';
         }
         else if(comp === CHOICES[1]) {
             compWin++;
-            msg.textContent = "You LOSE! PAPER beats ROCK.";
+            display.textContent = "You LOSE! PAPER beats ROCK.";
+            display.style.color = 'red';
         } 
         else {
             compWin++;
-            msg.textContent = "You LOSE! SCISSORS beats PAPER.";
+            display.textContent = "You LOSE! SCISSORS beats PAPER.";
+            display.style.color = 'red';
         }
 
     }
