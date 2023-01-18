@@ -70,10 +70,12 @@ button{
 .msg{
     align-self: center;
     color: white;
-    margin-top: 40vh;
+    margin-top: 0vh;
     font-size: 2rem;
     font-family: 'Press Start 2P', cursive;
     padding: 2rem;
+    text-align: center;
+    line-height: 2;
 }
 
 button.selected{
@@ -86,6 +88,7 @@ button.selected{
     border: 2px solid #39fc03;
     text-decoration: underline;
     padding: 2rem;
+    color: #39fc03;
 }
 
 .lose{
@@ -93,4 +96,15 @@ button.selected{
     border: 2px solid red;
     text-decoration: underline;
     padding: 2rem;
+    color: red;
+}
+
+.score-board{
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.score{
+    padding: 1rem;
 }

@@ -12,28 +12,55 @@ const rock = document.querySelector("button[data-pick='rock']");
 const paper = document.querySelector("button[data-pick='paper']");
 const scissors = document.querySelector("button[data-pick='scissors']");
 const display = document.querySelector(".msg");
-
-
+const playerDisplay = document.querySelector('.p1');
+const compDisplay = document.querySelector('.p2');
 
 rock.addEventListener('click', () => {
 
     //add btn after click sa ibang buttons
-
+    updateDisplay('ROCK');
     change(rock, paper, scissors);
     playerPick='rock';
+
+    if(playerWin == 5 || compWin ==5){
+        playerWin = 0;
+        compWin = 0;
+
+        playerDisplay.innerHTML = '';
+        compDisplay.innerHTML = '';
+    }
 });
 
 paper.addEventListener('click', () => {
+    updateDisplay('PAPER');
     change(paper, rock, scissors);
     playerPick='paper';
+
+    if(playerWin == 5 || compWin ==5){
+        playerWin = 0;
+        compWin = 0;
+
+        playerDisplay.innerHTML = '';
+        compDisplay.innerHTML = '';
+    }
 });
 
 scissors.addEventListener('click', () => {
+    updateDisplay('SCISSORS');
     change(scissors, rock, paper);
     playerPick='scissors';
+
+    if(playerWin == 5 || compWin ==5){
+        playerWin = 0;
+        compWin = 0;
+
+        playerDisplay.innerHTML = '';
+        compDisplay.innerHTML = '';
+    }
 });
 
 start.addEventListener('click', () => {
+
     const strtMsg = "Start";
     const endMsg = "CHOOSE SOMETHING!";
     if(playerPick === "") {
@@ -55,29 +82,39 @@ start.addEventListener('click', () => {
         let comp = getComputerChoice();
         playRound(playerPick, comp);
     }
+
     
-    display.classList.remove('win');
-    display.classList.remove('lose');
 
     undoChange(rock, paper, scissors);
     processWinner();
+    
+    
+    if(playerWin > 0) playerDisplay.innerHTML = playerWin;
+    if(compWin > 0) compDisplay.innerHTML = compWin;
+
+    console.log('Player Win = ' + playerWin);
+    console.log('Player Lost = ' + compWin);
+
 
 });
+
+function updateDisplay(str){
+    display.innerHTML = str;
+    display.classList.remove('lose');
+    display.classList.remove('win');
+    display.style.color = 'white';
+}
 
 function processWinner(){
     if(playerWin == 5){
 
         display.textContent = 'YOU WON THE GAME! CONGRATULATION!';
         display.classList.add('win');
-        playerWin = 0;
-        compWin = 0;
     }
 
     if(compWin == 5){
         display.textContent = 'YOU LOST THE GAME! BETTER LUCK NEXT TIME!';
         display.classList.add('lose');
-        playerWin = 0;
-        compWin = 0;
     }
 }
 
