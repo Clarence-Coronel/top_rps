@@ -16,61 +16,40 @@ const playerDisplay = document.querySelector('.p1');
 const compDisplay = document.querySelector('.p2');
 
 rock.addEventListener('click', () => {
-
-    //add btn after click sa ibang buttons
+    
     updateDisplay('ROCK');
     change(rock, paper, scissors);
     playerPick='rock';
-
-    if(playerWin == 5 || compWin ==5){
-        playerWin = 0;
-        compWin = 0;
-
-        playerDisplay.innerHTML = '';
-        compDisplay.innerHTML = '';
-    }
+    reset();
 });
 
 paper.addEventListener('click', () => {
     updateDisplay('PAPER');
     change(paper, rock, scissors);
     playerPick='paper';
-
-    if(playerWin == 5 || compWin ==5){
-        playerWin = 0;
-        compWin = 0;
-
-        playerDisplay.innerHTML = '';
-        compDisplay.innerHTML = '';
-    }
+    reset();
 });
 
 scissors.addEventListener('click', () => {
     updateDisplay('SCISSORS');
     change(scissors, rock, paper);
     playerPick='scissors';
-
-    if(playerWin == 5 || compWin ==5){
-        playerWin = 0;
-        compWin = 0;
-
-        playerDisplay.innerHTML = '';
-        compDisplay.innerHTML = '';
-    }
+    reset();
+    
 });
 
 start.addEventListener('click', () => {
 
     const strtMsg = "Start";
     const endMsg = "CHOOSE SOMETHING!";
-    if(playerPick === "") {
+    if(playerPick === "") {//if start btn is clicked when no choice is picked changes start btn appearance 
         if(start.textContent === strtMsg){
             start.classList.remove("btn");
             start.classList.add("error");
             start.textContent = endMsg;
         }
 
-        setTimeout(()=> {
+        setTimeout(()=> { //after 2 sec goes back to start btn default appearance
             if(start.textContent === endMsg){
                 start.classList.remove("error");
                 start.classList.add("btn");
@@ -78,13 +57,10 @@ start.addEventListener('click', () => {
             }
         }, 2000);
     }else{
-        // playRound(playerPick, getComputerChoice);
         let comp = getComputerChoice();
         playRound(playerPick, comp);
     }
-
     
-
     undoChange(rock, paper, scissors);
     processWinner();
     
@@ -98,6 +74,17 @@ start.addEventListener('click', () => {
 
 });
 
+function reset(){
+    if(playerWin == 5 || compWin ==5){
+        playerWin = 0;
+        compWin = 0;
+
+        playerDisplay.innerHTML = '';
+        compDisplay.innerHTML = '';
+    }
+}
+
+//changes screen text to default and displays current chosen pick
 function updateDisplay(str){
     display.innerHTML = str;
     display.classList.remove('lose');
@@ -118,6 +105,7 @@ function processWinner(){
     }
 }
 
+//undo the 'change' function
 function undoChange(rock, paper, scissors){
     rock.classList.add('btn');
     paper.classList.add('btn');
@@ -127,17 +115,10 @@ function undoChange(rock, paper, scissors){
     paper.classList.remove('selected');
     scissors.classList.remove('selected');
 
-    // start.style.color = 'white';
-    // start.style.backgroundColor = 'violet';
-
-    // setTimeout(()=> {
-    //     start.style.color = 'aqua';
-    //     start.style.backgroundColor = 'blueviolet';
-    // },1000)
-
     playerPick = '';
 }
 
+//changes button appearance if selected
 function change(selected, nonSelect, nonSelect2){
 
     selected.classList.add('selected');
@@ -151,9 +132,7 @@ function change(selected, nonSelect, nonSelect2){
 
 }
 
-
-
-
+//randomly generate number from 0 to 2 then generate equivalent from CHOICES array
 function getComputerChoice(){
     let rand = Math.floor(Math.random() * 3);
 
@@ -161,21 +140,6 @@ function getComputerChoice(){
     else if (rand === 1) return CHOICES[1];
     else return CHOICES[2];
 }
-
-// function getPlayerChoice(){
-//     let isNotValid = true;
-//     let choice;
-//     while(isNotValid){
-
-//         choice = prompt("Pick a Weapon(ROCK, PAPER, or SCISSORS): ").toUpperCase();
-//         if( (choice === CHOICES[0]) || (choice === CHOICES[1]) || (choice === CHOICES[2]) ){
-//             isNotValid = false;
-//             return choice;
-//         }else {
-//             console.error("Invalid Input");
-//         }
-//     }
-// }
 
 function playRound(player, comp){
     player = player.toUpperCase();
@@ -240,24 +204,6 @@ function playRound(player, comp){
     }
 }
 
-function game(){
-
-    //add eventlistener to a button to then call playRound()
-    for(i = 0; i < MAXROUNDS; i++){
-        playRound(getPlayerChoice(), getComputerChoice());
-        console.log("PLAYER: " + playerWin);
-        console.log("COMPUTER: " + compWin);
-        console.log("DRAW: " + drawCounter);
-        console.log("\n");
-    }
-
-    if(playerWin > compWin) console.log("Congratulations! You won the game.\n\n");
-    else console.log("Better luck next time! You lost the game.\n\n");
-
-    playerWin = 0;
-    compWin = 0;
-    drawCounter = 0;
-}
 
 
 
